@@ -1,16 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+
 {% for each in each_blog %}
-<h1>{{ each.title }}</h1><br>
+<h1>{{ each.title }}</h1>
+<p color="yellow">created at: {{ each.timestamp }}</p>
 <p>{{ each.context }}</p>
 {% endfor %}
 
 <a href="/blog/">Return to index</a>
-
-</body>
-</html>
+{% endblock %}

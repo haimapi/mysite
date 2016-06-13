@@ -1,6 +1,6 @@
 {% extends 'base.html' %} }
 {% block content %}
-<strong>Blog List</strong>
+<h1>Blog List</h1>
 <ul>
 {% for paper in all_blog %}
     <li><a href="read/{{ paper.slug }}">{{ paper.title }}</a></li>
