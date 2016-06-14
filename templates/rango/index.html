@@ -4,26 +4,18 @@
 {% load staticfiles %}
 {% block content %}
 
-<html>
-<head>
-    <link href="/static/images/favicon.ico" rel="icon" type="image/x-icon" />
-    <title>rango</title>
-</head>
-
-
-<body>
     <h1>hello</h1>
 
     {% if categories %}
         <ul>
             {% for category in categories %}
-            <li><a href="category/{{ category.slug }}">{{ category.name }}</a></li>
+            <li><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a></li>
             {% endfor %}
         </ul>
     {% else %}
         <strong>There are no categories present.</strong>
     {% endif %}
-    <a href="/rango/about/">About</a>
-</body>
-</html>
+    <a href="/rango/about/">About</a><br>
+    <a href="/rango/add_category/">Add Category</a><br>
+
 {% endblock %}

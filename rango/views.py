@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rango.models import Category, Page
-from rango.forms import CategoryForm
+from rango.forms import CategoryForm, AddForm, AddUser
+
 
 # Create your views here.
 def index(request):
-    #con_text = {'boldmessage':'i am bold', 'another':'i am another'}
-    #return render(request, 'rango/index.html', con_text)
-    category_list = Category.objects.order_by('-likes')[:5]
+    # con_text = {'boldmessage':'i am bold', 'another':'i am another'}
+    # return render(request, 'rango/index.html', con_text)
+    category_list = Category.objects.order_by('-likes')
     context_dict = {'categories': category_list}
     return render(request, 'rango/index.html', context_dict)
 
@@ -35,6 +36,7 @@ def category(request, category_name_slug):
 def add_category(request):
     # A HTTP POST?
     if request.method == 'POST':
+
         form = CategoryForm(request.POST)
 
         # a valid form?
@@ -51,3 +53,30 @@ def add_category(request):
         form = CategoryForm()
 
     return render(request, 'rango/add_category.html', {'form': form})
+
+
+def calc(request):
+    if request.method == 'POST':
+        form = AddForm(request.POST)
+
+        if form.is_valid():
+            a = form.cleaned_data['a']
+            b = form.cleaned_data['b']
+            return HttpResponse(str(int(a) + int(b)))
+    else:
+        form = AddForm()
+
+    return render(request, 'rango/calc.html', {'form': form})
+
+
+def user(request):
+    if request.method == 'POST':
+        form = AddUser(request.POST)
+        if form.is_valid():
+            firstname = form.cleaned_data['firstname']
+            lastname = form.cleaned_data['lastname']
+            return HttpResponse('Hello {0} {1}'.format(firstname, lastname))
+    else:
+        form = AddUser()
+
+    return render(request, 'rango/user.html', {'from': form})

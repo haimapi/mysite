@@ -23,3 +23,13 @@ class PageForm(forms.ModelForm):
         # Provide an association between ModelForm and a model
         model = Page
         exclude = ('category', )
+
+
+class AddForm(forms.Form):
+    a = forms.IntegerField()
+    b = forms.IntegerField()
+
+
+class AddUser(forms.Form):
+    firstname = forms.CharField()
+    lastname = forms.CharField()
