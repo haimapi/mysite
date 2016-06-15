@@ -1,7 +1,9 @@
+# encoding=utf-8
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.mail import send_mail
 from rango.models import Category, Page
-from rango.forms import CategoryForm, AddForm, AddUser
+from rango.forms import CategoryForm, AddForm, AddUser, ContactForm
 
 
 # Create your views here.
@@ -73,10 +75,25 @@ def user(request):
     if request.method == 'POST':
         form = AddUser(request.POST)
         if form.is_valid():
-            firstname = form.cleaned_data['firstname']
-            lastname = form.cleaned_data['lastname']
-            return HttpResponse('Hello {0} {1}'.format(firstname, lastname))
+            first = form.cleaned_data['firstname']
+            last = form.cleaned_data['lastname']
+            return HttpResponseRedirect('/rango/')
     else:
         form = AddUser()
 
-    return render(request, 'rango/user.html', {'from': form})
+    return render(request, 'rango/user.html', {'form': form})
+
+
+#def contact(request):
+#    if request.method == 'POST':
+#        form = ContactForm()
+#        if form.is_valid():
+#            subject = form.cleaned_data['subject']
+#            message = form.cleaned_data['message']
+#            sender = form.clean_data['sender']
+#            cc_myself = form.clean_data['cc_myself']
+#
+#                recipients = ['haimapi@163.com']
+#            if cc_myself:
+#        recipients.append(sender)
+#    send_mail

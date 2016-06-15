@@ -2,12 +2,7 @@
 {% block content %}
 <form action="/rango/user/" method="post">
 {% csrf_token %}
-    {% for foo in from %}
-        {{ foo.name }}
-        {{ foo }}
-        <br>
-    {% endfor %}
-
-    <input type="submit" value="Submit" />
+    {{ form.as_p }}
+<input type="submit" value="Submit" />
 </form>
 {% endblock %}
