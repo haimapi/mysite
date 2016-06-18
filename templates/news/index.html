@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for foo in context %}
+    <h1>{{ foo.title }}</h1>
+    <p>{{ foo.content }}</p>
+    {% endfor %}
+
+{% endblock %}
