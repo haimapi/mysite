@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'rango',
     'blog',
     'news',
+    'polls',
 )
 
 MIDDLEWARE_CLASSES = (
