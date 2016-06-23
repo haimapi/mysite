@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from rango.models import Category, Page
-from rango.forms import CategoryForm, AddForm, AddUser, ContactForm
+from rango.forms import CategoryForm, AddForm, AddUser, ContactForm, UserForm, UserProfileForm
 
 
 # Create your views here.
@@ -97,3 +97,24 @@ def user(request):
 #            if cc_myself:
 #        recipients.append(sender)
 #    send_mail
+
+
+def register(request):
+
+    registered = False
+
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        profile_form = UserProfileForm(data=request.POST)
+
+        # if the two forms are valid...
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+
+            # hash the password with the set_password method
+            user.set_password(user.password)
+            user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+
